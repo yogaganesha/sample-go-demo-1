@@ -2,12 +2,12 @@ package main
 
 import (
 	// "fmt"
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
-	"io/ioutil"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestHTTPHandler(t *testing.T) {
@@ -23,5 +23,6 @@ func TestHTTPHandler(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	assert.Equal(t, string(response), "Congratulations! Your Go application has been successfully deployed on Kubernetes.")
+	require.Equal(t, r.StatusCode, http.StatusOK)
+	t.Log(response)
 }
