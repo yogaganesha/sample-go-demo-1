@@ -124,7 +124,7 @@
 						"containers": [
 							{
 								"name": "((application.name))",
-								"image": "((application.name)):((application.version))",
+								"image": "guide-rails/((application.name)):((application.version))",
 								"resources": {},
 								"imagePullPolicy": "Always",
 								"securityContext": {
