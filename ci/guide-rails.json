@@ -167,7 +167,7 @@
 						"containers": [
 							{
 								"name": "((application.name))",
-								"image": "((application.name)):((application.version))",
+								"image": "guide-rails/((application.name)):((application.version))",
 								"resources": {},
 								"imagePullPolicy": "Always",
 								"securityContext": {
@@ -227,13 +227,7 @@
 			"init": {
 				"command": "bin/start_service.sh"
 			}
-		},
-		"releases": [
-			{
-				"name": "consul",
-				"version": "latest"
-			}
-		]
+		}
 	},
 	"organization": {
 		"orgname": "Playground"
