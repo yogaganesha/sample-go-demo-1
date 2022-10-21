@@ -1,14 +1,14 @@
-FROM alpine:latest
+FROM bitnami/minideb-extras
 
-LABEL maintainer=Calculi \
-    email=engineering@guide-rails.io
+MAINTAINER Bitnami <containers@bitnami.com>
 
-RUN echo 'OS version info...' && cat /etc/os-release \
-    && apk -f -q update \
-    && apk -f -q --no-cache add ca-certificates tzdata
-COPY "creds/CalculiCA-cert.pem" "/usr/local/share/ca-certificates/CalculiCA-cert.crt"
-RUN update-ca-certificates
+COPY app-code/http-sample /app/http-sample
 
-RUN adduser -G root -S guiderails -u 100
-USER 100
-ENV PATH="${PATH}:/usr/local/bin"
+USER bitnami
+
+WORKDIR /app
+
+EXPOSE 3000
+
+ENTRYPOINT ["/app/http-sample"]
+
