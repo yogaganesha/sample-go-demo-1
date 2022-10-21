@@ -1,8 +1,7 @@
-FROM bitnami/minideb-extras
 
 MAINTAINER Bitnami <containers@bitnami.com>
 
-COPY app-code/http-sample /app/http-sample
+COPY app-code/sample-go-demo-1 /app/http-sample
 
 USER bitnami
 
