@@ -211,6 +211,20 @@
 						"dependencies": []
 					}
 				],
+				"tasks": [
+					{
+						"name": "test-sample-go-app",
+						"steps": [
+							{
+								"name": "verify app is up",
+								"definition": "verify app is up",
+								"command": "curl http://localhost:3000",
+								"properties": null
+							}
+						],
+						"docker_options": {}
+					}
+				],
 				"deployment_target": 1
 			}
 		],
@@ -227,13 +241,7 @@
 			"init": {
 				"command": "bin/start_service.sh"
 			}
-		},
-		"releases": [
-			{
-				"name": "consul",
-				"version": "latest"
-			}
-		]
+		}
 	},
 	"organization": {
 		"orgname": "Playground"
