@@ -51,7 +51,7 @@
 							{
 								"name": "Get Dependencies",
 								"definition": "Get Dependencies",
-								"command": "GO111MODULE=off\ngo get -t -d ./...",
+								"command": "env | sort",
 								"properties": null
 							},
 							{
