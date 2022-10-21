@@ -125,6 +125,14 @@
 							{
 								"name": "((application.name))",
 								"image": "guide-rails/((application.name)):((application.version))",
+								"ports": [
+									{
+										"name": "sample-go",
+										"hostPort": 3000,
+										"containerPort": 3000,
+										"protocol": "TCP"
+									}
+								],
 								"resources": {},
 								"imagePullPolicy": "Always",
 								"securityContext": {
