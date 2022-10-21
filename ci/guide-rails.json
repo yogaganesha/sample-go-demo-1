@@ -14,6 +14,18 @@
 			{
 				"name": "Build",
 				"segment_type": "build",
+				"publish_attributes": {
+					"publish": true,
+					"docker_images": [
+						{
+							"repository": "((application.name))",
+							"tags": [
+								"((application.version))"
+							],
+							"context": "."
+						}
+					]
+				},
 				"exit_actions": {},
 				"properties": [
 					{
@@ -29,7 +41,7 @@
 						"name": "((application.name))",
 						"downloads": [],
 						"files": [
-							"((application.name))*"
+							"app-code/((application.name))*"
 						]
 					}
 				],
@@ -51,25 +63,25 @@
 							{
 								"name": "Get Dependencies",
 								"definition": "Get Dependencies",
-								"command": "env | sort",
+								"command": "go get -t -d ./...\n\ngo install github.com/onsi/ginkgo/v2/ginkgo@v2.1.3 ",
 								"properties": null
 							},
 							{
 								"name": "Unit Tests",
 								"definition": "Unit Tests",
-								"command": "set -o pipefail\nginkgo -cover -r --skip-package=pb,test,mock,proto,testdata | tee ginkgo.output",
+								"command": "set -o pipefail\n${GOPATH}/bin/ginkgo -cover -r  --skip-package=pb,test,mock,proto,testdata,gr-cli,util | tee ginkgo.output",
 								"properties": null
 							},
 							{
 								"name": "Convert coverage",
 								"definition": "Convert coverage",
-								"command": "[ -f ginkgo.output ] \u0026\u0026 cat ginkgo.output 2\u003e\u00261 | go-junit-report \u003e test.xml\n[ -f coverprofile.out ] \u0026\u0026 gocov convert coverprofile.out | gocov-xml \u003e coverage.xml",
+								"command": "cat ginkgo.output 2\u003e\u00261 | go-junit-report \u003e test.xml\ngocov convert coverprofile.out | gocov-xml \u003e coverage.xml",
 								"properties": null
 							},
 							{
 								"name": "Build",
 								"definition": "Build",
-								"command": "go build -o ((application.name))",
+								"command": "cd app-code\ngo build -o ((application.name))",
 								"properties": null
 							}
 						],
@@ -81,7 +93,8 @@
 		"exit_actions": {},
 		"default_properties": [],
 		"deployment_files": [],
-		"application_init": {}
+		"application_init": {},
+		"process": {}
 	},
 	"organization": {
 		"orgname": "Playground"
