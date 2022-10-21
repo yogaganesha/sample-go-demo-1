@@ -125,6 +125,10 @@
 							{
 								"name": "((application.name))",
 								"image": "guide-rails/((application.name)):((application.version))",
+								"command": [
+									"/bin/sh",
+									"((application.job.dir))/bin/start-service.sh"
+								],
 								"ports": [
 									{
 										"name": "sample-go",
